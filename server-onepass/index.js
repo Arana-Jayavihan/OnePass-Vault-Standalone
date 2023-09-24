@@ -10,6 +10,8 @@ import rfs from 'rotating-file-stream'
 import path from 'path'
 import { fileURLToPath } from "url"
 import cookieParser from 'cookie-parser'
+import https from "https"
+import fs from 'fs'
 
 //Routes
 import authRoutes from "./Routes/authRoutes.js"
@@ -151,10 +153,17 @@ app.use("/api", loginRoutes)
 app.use("/api", webSesionRoutes)
 
 // LISTNER
+const options = {
+    key: fs.readFileSync('ecdsaPrivKey.pem'),
+    cert: fs.readFileSync('cert.pem')
+}
+const server = https.createServer(options, app)
+
 const PORT = process.env.PORT || 9000
 
+
 try {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log("\n********************************************\n")
         console.log(`Server Running on port : ${PORT}`)
         console.log("\n********************************************\n")
