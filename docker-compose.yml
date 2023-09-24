@@ -6,7 +6,7 @@ services:
     build:
       context: ./client-onepass
     depends_on:
-      - onepass-server
+      - api-server
     command: npm run preview
     ports:
       - "3000:3000/tcp"
