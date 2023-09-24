@@ -109,7 +109,7 @@ export const decryptRequest = async (req, res, next) => {
 
 export const checkRequest = (req, res, next) => {
     try {
-        if (process.env.ENV === "DOCKER") {
+        if (process.env.ENV === "PROD") {
             const headers = req.headers
             const params = req.params
             const query = req.query
