@@ -65,6 +65,12 @@ else if (process.env.ENV === "DOCKER") {
     }
 }
 
+// else if (process.env.ENV === "DOCKER") {
+//     corsOptions = {
+//         origin: ["https://localhost:3001"],
+//         credentials: true,
+//     }
+// }
 app.use(cors(corsOptions))
 app.use(cookieParser())
 
