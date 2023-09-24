@@ -13,10 +13,8 @@ disableReactDevTools()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<BrowserRouter>
-		<React.StrictMode>
-			<Provider store={store}>
-				<WebSessionHandler app={<App />} />
-			</Provider>
-		</React.StrictMode>
+		<Provider store={store}>
+			<WebSessionHandler app={<App />} />
+		</Provider>
 	</BrowserRouter>
 );

@@ -285,7 +285,7 @@ export const getVaultData = async (req, res) => {
             if (encVaultUnlockToken === undefined) {
                 res.clearCookie('encVaultUnlockToken', { httpOnly: true, secure: true, sameSite: "none" })
                 res.status(400).json({
-                    message: "Invalid Vault Token"
+                    message: "Invalid Vault Token 1"
                 })
             }
             else {
@@ -322,7 +322,7 @@ export const getVaultData = async (req, res) => {
                         else {
                             res.clearCookie('encVaultUnlockToken', { httpOnly: true, secure: true, sameSite: "none" })
                             res.status(400).json({
-                                message: "Invalid Vault Token"
+                                message: "Invalid Vault Token 2"
                             })
                             try {
                                 delete vaultUnlockTokens[decoded.id]
@@ -347,7 +347,7 @@ export const getVaultData = async (req, res) => {
                 else {
                     res.clearCookie('encVaultUnlockToken', { httpOnly: true, secure: true, sameSite: "none" })
                     res.status(400).json({
-                        message: "Invalid Vault Token"
+                        message: "Invalid Vault Token 3"
                     })
                     try {
                         delete vaultUnlockTokens[decoded.id]
