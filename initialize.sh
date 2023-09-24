@@ -81,14 +81,14 @@ mv privatechain-onepass/privateChainDocker/genesisTemplate.json privatechain-one
 
 # Enivironment variable configuration
 currentDir=$(pwd)
-cp privatechain-onepass/templates/envTemplate .env
-sed -i "s/"CHAINID"/$CHAINID/" privatechain-onepass/privatechain-onepass/.env
-sed -i "s/"NODE1_ACC_PUB"/0x$pubKey1/" privatechain-onepass/privatechain-onepass/.env
-sed -i "s/"NODE2_ACC_PUB"/0x$pubKey2/" privatechain-onepass/privatechain-onepass/.env
-sed -i "s/"NODE3_ACC_PUB"/0x$pubKey3/" privatechain-onepass/privatechain-onepass/.en
-sed -i "s/"NODE4_ACC_PUB"/0x$pubKey4/" privatechain-onepass/privatechain-onepass/.env
-sed -i "s/"BOOTNODE_PUB_KEY"/$bootNodeEnode/" privatechain-onepass/privatechain-onepass/.env
-sed -i "s@"CURRENT_WORK_DIR"@$currentDir/privatechain-onepass/@" privatechain-onepass/privatechain-onepass/.env
+cp privatechain-onepass/templates/envTemplate privatechain-onepass/.env
+sed -i "s/"CHAINID"/$CHAINID/" privatechain-onepass/.env
+sed -i "s/"NODE1_ACC_PUB"/0x$pubKey1/" privatechain-onepass/.env
+sed -i "s/"NODE2_ACC_PUB"/0x$pubKey2/" privatechain-onepass/.env
+sed -i "s/"NODE3_ACC_PUB"/0x$pubKey3/" privatechain-onepass/.en
+sed -i "s/"NODE4_ACC_PUB"/0x$pubKey4/" privatechain-onepass/.env
+sed -i "s/"BOOTNODE_PUB_KEY"/$bootNodeEnode/" privatechain-onepass/.env
+sed -i "s@"CURRENT_WORK_DIR"@$currentDir/privatechain-onepass/@" privatechain-onepass/.env
 
 # Initialize nodes with genesis state
 geth init --datadir privatechain-onepass/privateChainDocker/node1 privatechain-onepass/privateChainDocker/genesis.json
