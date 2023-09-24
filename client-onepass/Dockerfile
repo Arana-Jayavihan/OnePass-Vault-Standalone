@@ -9,4 +9,5 @@ FROM node:18 as PRODUCTION_IMAGE
 WORKDIR /usr/bin/react-app-prod
 COPY package.json .
 COPY vite.config.js .
+RUN npm install
 COPY --from=BUILD_IMAGE /usr/bin/react-app-dev/dist/ /usr/bin/react-app-prod/dist

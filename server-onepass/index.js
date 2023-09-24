@@ -60,7 +60,7 @@ else if (process.env.ENV === "DEV") {
 
 else if (process.env.ENV === "DOCKER") {
     corsOptions = {
-        origin: ["https://localhost:3000"],
+        origin: ["https://4.194.91.203:3000"],
         credentials: true,
     }
 }
