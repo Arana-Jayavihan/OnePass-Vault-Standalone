@@ -111,8 +111,8 @@ rm privateChainDocker/node*/geth/nodekey
 
 PORT=9000
 AES_SECRET=$(gpg --gen-random --armor 2 32)
-cp templates/nodeEnv server-onepass/.env
-sed -i "s/"PORT_VALUE"/$PORT/" server-onepass/.env
-sed -i "s/"NETWORKID_VALUE"/$CHAINID/" server-onepass/.env
-sed -i "s@"AES_SECRET_VALUE"@$AES_SECRET@" server-onepass/.env
-sed -i "s@"RPCHOST_VALUE"@"http://172.16.254.7:8979"@" server-onepass/.env
+cp templates/nodeEnv ../server-onepass/.env
+sed -i "s/"PORT_VALUE"/$PORT/" ../server-onepass/.env
+sed -i "s/"NETWORKID_VALUE"/$CHAINID/" ../server-onepass/.env
+sed -i "s@"AES_SECRET_VALUE"@$AES_SECRET@" ../server-onepass/.env
+sed -i "s@"RPCHOST_VALUE"@"http://172.16.254.7:8979"@" ../server-onepass/.env
