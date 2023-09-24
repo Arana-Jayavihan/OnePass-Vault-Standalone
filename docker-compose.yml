@@ -1,6 +1,19 @@
 version: '3.7'
 
 services:
+  react-app:
+    hostname: onepass-vault
+    build:
+      context: ./client-onepass
+    depends_on:
+      - onepass-server
+    command: npm run preview
+    ports:
+      - "3000:3000/tcp"
+    networks:
+      onepass-vnet:
+        ipv4_address: 172.16.254.11
+
   api-server:
     hostname: onepass-server
     env_file:
