@@ -33,10 +33,10 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const navItems = [
-    {
-        text: "Dashboard",
-        icon: <HomeOutlined />,
-    },
+    // {
+    //     text: "Dashboard",
+    //     icon: <HomeOutlined />,
+    // },
     {
         text: "Data",
         icon: null,
@@ -49,10 +49,10 @@ const navItems = [
         text: "Transactions",
         icon: <SwapHorizOutlinedIcon />,
     },
-    {
-        text: "Billing",
-        icon: <MonetizationOnIcon />,
-    },
+    // {
+    //     text: "Billing",
+    //     icon: <MonetizationOnIcon />,
+    // },
     
     {
         text: "Management",
