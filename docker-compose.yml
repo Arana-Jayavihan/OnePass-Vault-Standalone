@@ -16,8 +16,6 @@ services:
 
   api-server:
     hostname: onepass-server
-    env_file:
-      - .env
     build:
       context: ./server-onepass
     image: node-js
