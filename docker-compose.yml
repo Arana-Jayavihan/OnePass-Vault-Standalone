@@ -11,7 +11,7 @@ services:
     ports:
       - "3000:3000/tcp"
     networks:
-      onepass-vnet:
+      privatechain-onepass_onepass-vnet:
         ipv4_address: 172.16.254.11
 
   api-server:
@@ -25,5 +25,9 @@ services:
     ports:
       - "9000:9000/tcp"
     networks:
-      onepass-vnet:
+      privatechain-onepass_onepass-vnet:
         ipv4_address: 172.16.254.10
+
+networks:
+  privatechain-onepass_onepass-vnet:
+    external: true
