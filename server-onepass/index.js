@@ -10,8 +10,6 @@ import rfs from 'rotating-file-stream'
 import path from 'path'
 import { fileURLToPath } from "url"
 import cookieParser from 'cookie-parser'
-import https from "https"
-import fs from 'fs'
 
 //Routes
 import authRoutes from "./Routes/authRoutes.js"
@@ -62,7 +60,7 @@ else if (process.env.ENV === "DEV") {
 
 else if (process.env.ENV === "DOCKER") {
     corsOptions = {
-        origin: ["https://4.194.91.203:3000"],
+        origin: ["https://127.0.0.1:3000"],
         credentials: true,
     }
 }
@@ -152,18 +150,14 @@ app.use("/api", keyRoutes)
 app.use("/api", loginRoutes)
 app.use("/api", webSesionRoutes)
 
-// LISTNER
-const options = {
-    key: fs.readFileSync('ecdsaPrivKey.pem'),
-    cert: fs.readFileSync('cert.pem')
-}
-const server = https.createServer(options, app)
 
+
+// LISTNER
 const PORT = process.env.PORT || 9000
 
 
 try {
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
         console.log("\n********************************************\n")
         console.log(`Server Running on port : ${PORT}`)
         console.log("\n********************************************\n")
