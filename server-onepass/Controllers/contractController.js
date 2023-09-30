@@ -1,4 +1,4 @@
-import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -7,7 +7,6 @@ let contract = undefined
 let envContract = undefined
 let network = undefined
 let privateKey = undefined
-
 try {
     envContract = process.env.CONTRACT_DOCKER
     privateKey = process.env.PRIVATE_KEY_DOCKER
@@ -15,7 +14,7 @@ try {
         chainId: parseInt(process.env.NETWORKID),
         rpc: [process.env.RPCHOST],
         nativeCurrency: {
-            decimals: 30,
+            decimals: 18,
             name: "OnePass ETH",
             symbol: "OPETH",
         },
