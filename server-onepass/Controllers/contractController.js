@@ -12,7 +12,7 @@ try {
     envContract = process.env.CONTRACT_DOCKER
     privateKey = process.env.PRIVATE_KEY_DOCKER
     network = {
-        chainId: process.env.NETWORKID,
+        chainId: parseInt(process.env.NETWORKID),
         rpc: [process.env.RPCHOST],
         nativeCurrency: {
             decimals: 30,

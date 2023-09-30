@@ -59,6 +59,7 @@ pubKeyAcc1=$(cat "${files[1]}" | cut -d "," -f 1 | cut -d ":" -f 2 | tr -d '"')
 pass=$(cat privatechain-onepass/privateChainDocker/node1/passAccount1)
 keyStore=$(cat "${files[1]}")
 printf "account1\n\tpublicKey: $pubKeyAcc1\n\tpass: $pass\n\tkeystore: $keyStore\n\n" >> privatechain-onepass/chainInfo
+printf "$keyStore" >> account_1.json
 
 geth account new --datadir privatechain-onepass/privateChainDocker/node1/ --password privatechain-onepass/privateChainDocker/node1/passAccount2
 files=(privatechain-onepass/privateChainDocker/node1/keystore/*)
@@ -66,6 +67,7 @@ pubKeyAcc2=$(cat "${files[2]}" | cut -d "," -f 1 | cut -d ":" -f 2 | tr -d '"')
 pass=$(cat privatechain-onepass/privateChainDocker/node1/passAccount2)
 keyStore=$(cat "${files[2]}")
 printf "account2\n\tpublicKey: $pubKeyAcc2\n\tpass: $pass\n\tkeystore: $keyStore\n\n" >> privatechain-onepass/chainInfo
+printf "$keyStore" >> account_2.json
 
 # Genesis block configuration
 extraData="0x0000000000000000000000000000000000000000000000000000000000000000"
