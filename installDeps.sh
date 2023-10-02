@@ -1,5 +1,12 @@
 #!/usr/bin/bash
 
+#################################################
+#						#
+#	ONLY FOR UBUNTU BASED SYSTEMS		#
+#						#
+#################################################
+
+
 # Installing minor dependancies
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
@@ -11,9 +18,7 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 
 sudo apt-get update
 sudo apt-get install nodejs -y
-sudo apt-get install python
 sudo apt-get install gpg
-sudo apt-get install firewalld
 
 # Installing Docker
 # Add Docker's official GPG key:

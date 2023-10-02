@@ -5,11 +5,12 @@ dotenv.config()
 export const sendMails = async (mail) => {
     try {
         let user = process.env.MAIL_UESR_NAME
+        let pass = process.env.MAIL_USER_PASS
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: user,
-                pass: process.env.MAIL_USER_PASS
+                pass: pass
             },
             secure: true,
             requireTLS: true

@@ -7,7 +7,7 @@
 ############################################
 
 mkdir privatechain-onepass/privateChainDocker
-cp privatechain-onepass/templates/gethDockerFile privatechain-onepass/privateChainDocker/Dockerfile
+cp templates/gethDockerFile privatechain-onepass/privateChainDocker/Dockerfile
 
 # Creating the bootnode
 bootnode --genkey privatechain-onepass/privateChainDocker/bootNode.key
@@ -59,7 +59,7 @@ pubKeyAcc1=$(cat "${files[1]}" | cut -d "," -f 1 | cut -d ":" -f 2 | tr -d '"')
 pass=$(cat privatechain-onepass/privateChainDocker/node1/passAccount1)
 keyStore=$(cat "${files[1]}")
 printf "account1\n\tpublicKey: $pubKeyAcc1\n\tpass: $pass\n\tkeystore: $keyStore\n\n" >> privatechain-onepass/chainInfo
-printf "$keyStore" >> privatechain-onepass/account_1.json
+printf "$keyStore" > privatechain-onepass/account_1.json
 
 geth account new --datadir privatechain-onepass/privateChainDocker/node1/ --password privatechain-onepass/privateChainDocker/node1/passAccount2
 files=(privatechain-onepass/privateChainDocker/node1/keystore/*)
@@ -67,14 +67,14 @@ pubKeyAcc2=$(cat "${files[2]}" | cut -d "," -f 1 | cut -d ":" -f 2 | tr -d '"')
 pass=$(cat privatechain-onepass/privateChainDocker/node1/passAccount2)
 keyStore=$(cat "${files[2]}")
 printf "account2\n\tpublicKey: $pubKeyAcc2\n\tpass: $pass\n\tkeystore: $keyStore\n\n" >> privatechain-onepass/chainInfo
-printf "$keyStore" >> privatechain-onepass/account_2.json
+printf "$keyStore" > privatechain-onepass/account_2.json
 
 # Genesis block configuration
 extraData="0x0000000000000000000000000000000000000000000000000000000000000000"
 extraData+="$signers"
 extraData+="0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
-cp privatechain-onepass/templates/genesisTemplate.json privatechain-onepass/privateChainDocker/
+cp templates/genesisTemplate.json privatechain-onepass/privateChainDocker/
 sed -i "s/"CHAINID"/$CHAINID/" privatechain-onepass/privateChainDocker/genesisTemplate.json
 sed -i "s/"SIGNERS"/$extraData/" privatechain-onepass/privateChainDocker/genesisTemplate.json
 sed -i "s/"PREFUNDACC1"/$pubKeyAcc1/" privatechain-onepass/privateChainDocker/genesisTemplate.json
@@ -83,7 +83,7 @@ mv privatechain-onepass/privateChainDocker/genesisTemplate.json privatechain-one
 
 # Enivironment variable configuration
 currentDir=$(pwd)
-cp privatechain-onepass/templates/envTemplate privatechain-onepass/.env
+cp templates/envTemplate privatechain-onepass/.env
 sed -i "s/"CHAINID"/$CHAINID/" privatechain-onepass/.env
 sed -i "s/"NODE1_ACC_PUB"/0x$pubKey1/" privatechain-onepass/.env
 sed -i "s/"NODE2_ACC_PUB"/0x$pubKey2/" privatechain-onepass/.env
@@ -113,11 +113,12 @@ rm privatechain-onepass/privateChainDocker/node*/geth/nodekey
 
 PORT=9000
 AES_SECRET=$(gpg --gen-random --armor 2 32)
-cp privatechain-onepass/templates/nodeEnv server-onepass/.env
+cp templates/nodeEnv server-onepass/.env
 sed -i "s/"PORT_VALUE"/$PORT/" server-onepass/.env
 sed -i "s/"NETWORKID_VALUE"/$CHAINID/" server-onepass/.env
 sed -i "s@"AES_SECRET_VALUE"@$AES_SECRET@" server-onepass/.env
 sed -i "s@"RPCHOST_VALUE"@"http://172.16.254.7:8979"@" server-onepass/.env
 
+printf "Generating ECDSA Key Pair For Cookie Signing"
 openssl ecparam -name secp521r1 -genkey -noout -out server-onepass/ecdsaPrivKey.pem
 openssl ec -in server-onepass/ecdsaPrivKey.pem -pubout -out server-onepass/ecdsaPubKey.pem
