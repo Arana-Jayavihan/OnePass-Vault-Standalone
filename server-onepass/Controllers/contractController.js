@@ -9,6 +9,14 @@ let network = undefined
 let privateKey = undefined
 const contractPass = process.env.CONTRACT_PASS
 
+const fetchContract = async () => {
+    try {
+        contract = await sdk.getContract(envContract)
+    } catch (error) {
+        fetchContract()
+    }
+}
+
 try {
     envContract = process.env.CONTRACT
     privateKey = process.env.PRIVATE_KEY
@@ -27,9 +35,9 @@ try {
         name: "OnePass PrivateNet",
     }
 
-
     sdk = ThirdwebSDK.fromPrivateKey(privateKey, network);
-    contract = await sdk.getContract(envContract)
+    fetchContract()
+    
 } catch (error) {
     console.log(error)
 }

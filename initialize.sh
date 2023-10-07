@@ -19,8 +19,8 @@ gpg --gen-random --armor 2 32 > privatechain-onepass/privateChainDocker/node1/pa
 gpg --gen-random --armor 2 32 > privatechain-onepass/privateChainDocker/node2/passNode2
 gpg --gen-random --armor 2 32 > privatechain-onepass/privateChainDocker/node3/passNode3
 gpg --gen-random --armor 2 32 > privatechain-onepass/privateChainDocker/node4/passNode4
-gpg --gen-random --armor 2 32 > privatechain-onepass/privateChainDocker/node1/passAccount1
-gpg --gen-random --armor 2 32 > privatechain-onepass/privateChainDocker/node1/passAccount2
+passAccount1=$(gpg --gen-random --armor 2 32)
+passAccount2=$(gpg --gen-random --armor 2 32)
 
 CHAINID=210567
 printf "chainId: $CHAINID\n\n" > privatechain-onepass/chainInfo
@@ -56,17 +56,15 @@ printf "node4\n\tpublicKey: $pubKey4\n\tpass: $pass\n\n" >> privatechain-onepass
 geth account new --datadir privatechain-onepass/privateChainDocker/node1/ --password privatechain-onepass/privateChainDocker/node1/passAccount1
 files=(privatechain-onepass/privateChainDocker/node1/keystore/*)
 pubKeyAcc1=$(cat "${files[1]}" | cut -d "," -f 1 | cut -d ":" -f 2 | tr -d '"')
-pass=$(cat privatechain-onepass/privateChainDocker/node1/passAccount1)
 keyStore=$(cat "${files[1]}")
-printf "account1\n\tpublicKey: $pubKeyAcc1\n\tpass: $pass\n\tkeystore: $keyStore\n\n" >> privatechain-onepass/chainInfo
+printf "account1\n\tpublicKey: $pubKeyAcc1\n\tpass: $passAccount1\n" >> privatechain-onepass/chainInfo
 printf "$keyStore" > privatechain-onepass/account_1.json
 
 geth account new --datadir privatechain-onepass/privateChainDocker/node1/ --password privatechain-onepass/privateChainDocker/node1/passAccount2
 files=(privatechain-onepass/privateChainDocker/node1/keystore/*)
 pubKeyAcc2=$(cat "${files[2]}" | cut -d "," -f 1 | cut -d ":" -f 2 | tr -d '"')
-pass=$(cat privatechain-onepass/privateChainDocker/node1/passAccount2)
 keyStore=$(cat "${files[2]}")
-printf "account2\n\tpublicKey: $pubKeyAcc2\n\tpass: $pass\n\tkeystore: $keyStore\n\n" >> privatechain-onepass/chainInfo
+printf "account2\n\tpublicKey: $pubKeyAcc2\n\tpass: $passAccount2\n" >> privatechain-onepass/chainInfo
 printf "$keyStore" > privatechain-onepass/account_2.json
 
 # Genesis block configuration
