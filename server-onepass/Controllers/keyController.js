@@ -1,4 +1,4 @@
-import { getMasterEncKey, getPublicKey, getPrivateKey, getUserHashPass } from "./contractController.js"
+import { getMasterEncKey, getPublicKey, getPrivateKey } from "./contractController.js"
 
 export const getPrivKey = async (req, res) => {
     try {

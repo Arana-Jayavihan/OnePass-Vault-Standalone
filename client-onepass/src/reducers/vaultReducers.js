@@ -1,9 +1,9 @@
-import { authConsts, vaultConsts } from '../actions/constants'
+import { authConsts, loginConsts, vaultConsts } from '../actions/constants'
 
 const initState = {
     creating: false,
     updating: false,
-    deleteing: false,
+    deleting: false,
     accepting: false,
     loading: false,
     adding: false,
@@ -183,6 +183,28 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 accepting: false
+            }
+            break
+        case loginConsts.REMOVE_USER_LOGIN_REQUEST:
+            state = {
+                ...state,
+                deleting: true
+            }
+            break
+        case loginConsts.REMOVE_USER_LOGIN_SUCCESS:
+            state = {
+                ...state,
+                deleting: false,
+                vault: {
+                    ...state.vault,
+                    vaultLogins: action.payload
+                }
+            }
+            break
+        case loginConsts.REMOVE_USER_LOGIN_FAILED:
+            state = {
+                ...state,
+                deleting: false
             }
             break
         case authConsts.LOGOUT_SUCCESS:

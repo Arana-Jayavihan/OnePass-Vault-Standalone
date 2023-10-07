@@ -1,12 +1,10 @@
-import { addVaultLogin, getAllVaultLogins } from "./contractController.js"
+import { addVaultLogin, getAllVaultLogins, removeVaultLogin } from "./contractController.js"
 import { vaultLoginParser } from "../Parsers/parsers.js"
 import shortID from 'shortid'
-import CryptoJS from "crypto-js"
 import { encryptAES } from "./encryptController.js"
 
 export const addLogin = async (req, res) => {
     try {
-        console.log(req.body)
         const user = req.user
         if (req.body.email === user.email) {
             let customFields = req.body.customFields
@@ -45,7 +43,42 @@ export const addLogin = async (req, res) => {
                 message: "Unauthorized"
             })
         }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Something Went Wrong!",
+            error: error
+        })
+    }
+}
 
+export const deleteVaultLogin = async (req, res) => {
+    try {
+        const user = req.user
+        if (req.body.email === user.email) {
+            const result = await removeVaultLogin(user.email, user.hashPass, req.body.vaultIndex, req.body.loginIndex)
+            if (result === false || result === "") {
+                res.status(404).json({
+                    message: "Bad Request"
+                })
+            }
+            else if (result === "Invalid Password") {
+                res.status(401).json({
+                    message: "Invalid Password"
+                })
+            }
+            else if (result == true) {
+                res.status(200).json({
+                    message: "Removed credential details",
+                    serverPubKey: req.body.serverPubKey
+                })
+            }
+        }
+        else {
+            res.status(401).json({
+                message: "Unauthorized"
+            })
+        }
     } catch (error) {
         console.log(error)
         res.status(500).json({

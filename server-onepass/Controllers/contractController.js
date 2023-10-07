@@ -22,7 +22,7 @@ try {
     privateKey = process.env.PRIVATE_KEY
     network = {
         chainId: parseInt(process.env.NETWORKID),
-        rpc: [process.env.RPCHOST],
+        rpc: [process.env.RPCHOST, "http://127.0.0.1:8980"],
         nativeCurrency: {
             decimals: 18,
             name: "OnePass ETH",
@@ -148,22 +148,6 @@ export const getAssignVaults = async (email) => {
     }
 };
 
-export const getUserHashPass = async (email) => {
-    try {
-        const result = await contract.call("getUserHashPass", [
-			email,
-			contractPass
-		]);
-        return result;
-    } catch (error) {
-        console.log(error);
-        if (error.reason) {
-            return error.reason;
-        } else {
-            return false;
-        }
-    }
-};
 
 export const getPrivateKey = async (email, hashPass) => {
     try {

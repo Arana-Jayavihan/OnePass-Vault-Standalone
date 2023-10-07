@@ -509,6 +509,7 @@ export const decryptVaultLogins = async (logins, vaultKey) => {
         let loginArr = []
         for (let i = 0; i < logins.length; i++) {
             const login = {}
+            login["loginIndex"] = logins[i].loginIndex
             login["loginName"] = await decryptAES(logins[i].loginName, vaultKey)
             login["loginUrl"] = await decryptAES(logins[i].loginUrl, vaultKey)
             login["loginUsername"] = await decryptAES(logins[i].loginUsername, vaultKey)

@@ -4,6 +4,7 @@ import { vaultConsts } from "./constants.js"
 import { encryptAES } from "../helpers/encrypt.js"
 import { decryptVaultLogins } from "./vaultActions.js"
 import { decryptRequest, encryptRequest } from "./webSessionActions.js"
+import { loginConsts } from "./constants.js"
 
 export const addUserLogin = (form) => {
     return async dispatch => {
@@ -52,6 +53,40 @@ export const addUserLogin = (form) => {
             toast.error(res.response.data.message, { id: 'lae' })
             dispatch({
                 type: vaultConsts.ADD_NEW_VAULT_LOGIN_FAILED
+            })
+            return false
+        }
+    }
+}
+
+export const deleteVaultLogin = (email, loginIndex, vaultIndex, vaultKey) => {
+    return async dispatch => {
+        dispatch({
+            type: loginConsts.REMOVE_USER_LOGIN_REQUEST
+        })
+        const removeLoginForm = {
+            email: email,
+            vaultIndex: vaultIndex,
+            loginIndex: loginIndex
+        }
+
+        const webAESKey = sessionStorage.getItem('requestEncKey')
+        const { encForm, privateKey } = await encryptRequest(removeLoginForm, webAESKey)
+        const res = await axiosInstance.post('/login/remove-login', { 'encData': encForm })
+
+        if (res.status === 201) {
+            const decData = await decryptRequest(res.data.payload, res.data.serverPubKey, privateKey, webAESKey)
+            const decLogins = await decryptVaultLogins(decData, vaultKey)
+            toast.success("Login Removed", { id: 'lrs' })
+            dispatch({
+                type: loginConsts.REMOVE_USER_LOGIN_SUCCESS,
+                payload: decLogins
+            })
+        }
+        else if (res.response) {
+            toast.error(res.response.data.message, { id: 'lre' })
+            dispatch({
+                type: loginConsts.REMOVE_USER_LOGIN_FAILED
             })
             return false
         }

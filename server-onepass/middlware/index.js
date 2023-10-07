@@ -25,6 +25,7 @@ export const decryptRequest = async (req, res, next) => {
             url.includes('/auth/genkeys') ||
             url.includes('/auth/token') ||
             url.includes('/login/add-login') ||
+            url.includes('/login/remove-login') ||
             url.includes('/vault/add-vault') ||
             url.includes('/vault/get-vault-unlock-token') ||
             url.includes('/vault/get-enc-vault-key') ||
@@ -69,14 +70,12 @@ export const decryptRequest = async (req, res, next) => {
                                     message: "Request Not Allowed"
                                 })
                             }
-
                         }
                         else {
                             res.status(401).json({
                                 message: "Browser Fingerprint Mistmatch"
                             })
                         }
-
                     }
                     else {
                         res.status(401).json({
