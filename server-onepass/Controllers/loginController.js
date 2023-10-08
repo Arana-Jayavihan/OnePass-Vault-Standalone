@@ -67,10 +67,28 @@ export const deleteVaultLogin = async (req, res) => {
                     message: "Invalid Password"
                 })
             }
-            else if (result == true) {
-                res.status(200).json({
-                    message: "Removed credential details",
-                    serverPubKey: req.body.serverPubKey
+            else if (result === true) {
+                const logins = await getAllVaultLogins(req.body.vaultIndex)
+                if (logins === false) {
+                    res.status(500).json({
+                        message: 'Something Went Wrong!'
+                    })
+                }
+                else if (logins && logins.length >= 0) {
+                    const parsedLogins = vaultLoginParser(logins)
+                    const encodedPayload = JSON.stringify(parsedLogins)
+                    const encPayload = await encryptAES(encodedPayload, req.body.newServerAESKey)
+                    res.status(201).json({
+                        message: "Removed credential details",
+                        payload: encPayload,
+                        serverPubKey: req.body.serverPubKey
+                    })
+                }
+                
+            }
+            else {
+                res.status(500).json({
+                    message: "Something went wrong"
                 })
             }
         }

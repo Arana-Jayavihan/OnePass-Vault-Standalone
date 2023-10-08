@@ -234,12 +234,12 @@ const App = () => {
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
 					<Toaster
-						position="top-center"
+						position= {"top-center"}
 						reverseOrder={true}
 						toastOptions={{
 							style: {
 								background: mode === 'dark' ? '#333333' : '#dddddd',
-								color: mode === 'dark' ? '#ffffff' : '#333333'
+								color: mode === 'dark' ? '#ffffff' : '#333333',
 							}
 						}}
 					/>

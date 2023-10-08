@@ -583,7 +583,7 @@ export const removeVaultLogin = async (
         ]);
         if (result.receipt.confirmations != 0) {
             addTransactionHash(ownerEmail, result.receipt.transactionHash);
-            return result;
+            return true;
         } else if (!result.receipt) {
             return result;
         } else {

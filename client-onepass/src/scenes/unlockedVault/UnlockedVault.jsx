@@ -785,8 +785,7 @@ const UnlockedVault = () => {
     };
 
     const removeLogin = () => {
-        console.log(`deleted ${loginTodelete?.loginName}`);
-        dispatch(deleteVaultLogin(email, vault.vaultIndex, loginTodelete.loginIndex, vault.vaultKey))
+        dispatch(deleteVaultLogin(email, loginTodelete.loginIndex, vault.vaultIndex, vault.vaultKey))
         setLoginTodelete(undefined);
         setShowLoginRemoveModal(false);
     };
@@ -796,7 +795,7 @@ const UnlockedVault = () => {
                 show={showLoginRemoveModal}
                 close={closeLoginRemoveModal}
                 handleClose={removeLogin}
-                ModalTitle="Confirm Deletion"
+                ModalTitle="Confirm Removal"
                 size="md"
                 buttons={[
                     {
@@ -819,7 +818,7 @@ const UnlockedVault = () => {
                             marginBottom: ".5rem",
                         }}
                     >
-                        {`Confirm removal of credential ${loginTodelete?.loginName}`}
+                        {`Confirm removal of credential "${loginTodelete?.loginName}"`}
                     </Typography>
                 </Row>
             </NewModel>
@@ -955,7 +954,9 @@ const UnlockedVault = () => {
                                                         );
                                                         toast.success(
                                                             "Username Copied to Clipboard"
-                                                        );
+                                                        ,{
+                                                            id: "copy"
+                                                        });
                                                     }}
                                                 >
                                                     <MdFileCopy
@@ -1002,7 +1003,9 @@ const UnlockedVault = () => {
                                                             );
                                                             toast.success(
                                                                 "Password Copied to Clipboard"
-                                                            );
+                                                            ,{
+                                                                id: "copy"
+                                                            });
                                                         }}
                                                     >
                                                         <MdFileCopy

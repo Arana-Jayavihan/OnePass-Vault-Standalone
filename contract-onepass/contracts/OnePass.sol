@@ -149,6 +149,7 @@ contract OnePass {
         return true;
     }
 
+    // DONE
     function addUserKeys(
         string memory email,
         string memory encPrivateKey,
@@ -167,6 +168,7 @@ contract OnePass {
         return true;
     }
 
+    //DONE
     function addUserData(
         string memory email,
         string memory fName,
@@ -187,6 +189,7 @@ contract OnePass {
         return true;
     }
 
+    //DONE
     function addTxnHash(
         string memory email,
         string memory txnHash,
@@ -199,6 +202,7 @@ contract OnePass {
         return true;
     }
 
+    //PENDING
     function getAllTxnHashes(
         string memory _email,
         string memory contPass
@@ -208,6 +212,7 @@ contract OnePass {
         return (users[_email].email, users[_email].transactionHashes);
     }
 
+    //DONE
     function getPrivateKey(
         string memory email,
         string memory hashPass,
@@ -219,6 +224,7 @@ contract OnePass {
         return users[email].encPrivateKey;
     }
 
+    //DONE
     function getPublicKey(
         string memory email,
         string memory contPass
@@ -228,6 +234,7 @@ contract OnePass {
         return users[email].publicKey;
     }
 
+    //DONE
     function getMasterEncKey(
         string memory email,
         string memory hashPass,
@@ -239,6 +246,7 @@ contract OnePass {
         return users[email].masterEncKey;
     }
 
+    //DONE
     function getUserData(
         string memory _email,
         string memory contPass
@@ -263,6 +271,7 @@ contract OnePass {
         );
     }
 
+    //DONE
     function removeUser(
         string memory email,
         string memory hashPass,
@@ -276,6 +285,7 @@ contract OnePass {
     }
 
     // Vault Functions
+    //DONE
     function createVault(
         string memory email,
         string memory name,
@@ -337,6 +347,7 @@ contract OnePass {
         return true;
     }
 
+    //DONE
     function getVault(
         uint64 index,
         string memory contPass
@@ -345,6 +356,7 @@ contract OnePass {
         return vaults[index];
     }
 
+    //DONE
     function getAssignVaults(
         string memory email,
         string memory contPass
@@ -353,6 +365,7 @@ contract OnePass {
         return users[email].assignedVaults;
     }
 
+    //DONE
     function getUserEncVaultKey(
         string memory email,
         string memory hashPass,
@@ -386,6 +399,7 @@ contract OnePass {
     //     return userVaults;
     // }
 
+    //DONE
     function addVaultUser(
         uint64 vaultIndex,
         string memory userEmail,
@@ -424,6 +438,7 @@ contract OnePass {
         return true;
     }
 
+    //PENDING
     function removeVaultUser(
         string memory email,
         string memory hashPass,
@@ -459,6 +474,7 @@ contract OnePass {
         return true;
     }
 
+    //PENDING
     function removeVault(
         string memory email,
         string memory hashPass,
@@ -489,7 +505,8 @@ contract OnePass {
         return true;
     }
 
-    // // Login Functions
+    // Login Functions
+    //DONE
     function addVaultLogin(
         string memory email,
         string memory name,
@@ -534,6 +551,7 @@ contract OnePass {
         return true;
     }
 
+    //DONE
     function getAllVaultLogins(
         uint64 vaultIndex,
         string memory contPass
@@ -542,6 +560,7 @@ contract OnePass {
         return vaults[vaultIndex].logins;
     }
 
+    //DONE
     function removeVaultLogin(
         string memory email,
         string memory hashPass,
